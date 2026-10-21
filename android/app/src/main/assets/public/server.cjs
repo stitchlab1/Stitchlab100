@@ -28,25 +28,58 @@ var import_fs = __toESM(require("fs"), 1);
 var import_vite = require("vite");
 var import_genai = require("@google/genai");
 var import_dotenv = __toESM(require("dotenv"), 1);
+var import_crypto = __toESM(require("crypto"), 1);
 import_dotenv.default.config();
 var app = (0, import_express.default)();
 var PORT = 3e3;
 app.use(import_express.default.json());
-app.get("/", (req, res, next) => {
+app.use(import_express.default.text({ type: ["text/plain", "text/*"] }));
+app.use((req, res, next) => {
+  const isProd = process.env.NODE_ENV === "production";
+  const nonce = import_crypto.default.randomBytes(16).toString("base64");
+  res.locals.nonce = nonce;
+  if (isProd) {
+    res.setHeader("Cross-Origin-Opener-Policy", "same-origin-allow-popups");
+    res.setHeader("X-Frame-Options", "SAMEORIGIN");
+    const frameAncestors = "frame-ancestors 'self' https://*.google.com https://*.run.app https://ai.studio https://*.googleusercontent.com";
+    const csp = [
+      "default-src 'self'",
+      `script-src 'self' 'nonce-${nonce}' 'strict-dynamic' 'unsafe-eval' 'unsafe-inline' https: http:`,
+      "style-src 'self' 'unsafe-inline' https:",
+      "img-src 'self' data: blob: https: http:",
+      "font-src 'self' data: https:",
+      "connect-src 'self' https: wss: http: ws:",
+      "object-src 'none'",
+      "base-uri 'self'",
+      frameAncestors,
+      "require-trusted-types-for 'script'",
+      "trusted-types *"
+    ].join("; ");
+    res.setHeader("Content-Security-Policy", csp);
+  }
+  next();
+});
+var serveIndexHtml = (req, res) => {
+  const isProd = process.env.NODE_ENV === "production";
+  const hasDist = import_fs.default.existsSync(import_path.default.join(process.cwd(), "dist", "index.html"));
+  const baseDir = isProd || hasDist ? "dist" : ".";
+  const filePath = import_path.default.join(process.cwd(), baseDir, "index.html");
+  if (!import_fs.default.existsSync(filePath)) {
+    res.status(404).send("Index file not found");
+    return;
+  }
+  let html = import_fs.default.readFileSync(filePath, "utf8");
   const academyInvite = req.query.academyInvite;
-  const inviterName = req.query.inviterName ? String(req.query.inviterName) : "";
-  const previewImage = req.query.previewImage ? String(req.query.previewImage) : "";
-  if (academyInvite && process.env.NODE_ENV === "production") {
-    const filePath = import_path.default.join(process.cwd(), "dist", "index.html");
-    if (import_fs.default.existsSync(filePath)) {
-      let html = import_fs.default.readFileSync(filePath, "utf8");
-      const title = inviterName ? `\u0644\u0642\u062F \u062F\u0639\u0627\u0643 \u0635\u062F\u064A\u0642\u0643 ${inviterName} \u0644\u0644\u0627\u0646\u0636\u0645\u0627\u0645 \u0625\u0644\u0649 \u0635\u0641\u0648\u0641 StitchLab!` : `\u0644\u0642\u062F \u062F\u0639\u0627\u0643 \u0635\u062F\u064A\u0642\u0643 \u0644\u0644\u0627\u0646\u0636\u0645\u0627\u0645 \u0625\u0644\u0649 \u0635\u0641\u0648\u0641 StitchLab!`;
-      const description = `\u0627\u0636\u063A\u0637 \u0647\u0646\u0627 \u0644\u0642\u0628\u0648\u0644 \u0627\u0644\u062F\u0639\u0648\u0629 \u0648\u0627\u0644\u0628\u062F\u0621 \u0641\u064A \u0627\u0644\u062A\u062D\u062F\u064A \u0627\u0644\u062F\u0631\u0627\u0633\u064A`;
-      const image = previewImage || "https://raw.githubusercontent.com/stitchlab1/stitchlab2/0ceec11a5ca77c5d4607a90cab424bc9ec880155/stitchlab_icon_hd.png";
-      const protocol = req.protocol;
-      const host = req.get("host");
-      const fullUrl = `${protocol}://${host}${req.originalUrl || req.url}`;
-      const ogTags = `
+  if (academyInvite && isProd) {
+    const inviterName = req.query.inviterName ? String(req.query.inviterName) : "";
+    const previewImage = req.query.previewImage ? String(req.query.previewImage) : "";
+    const title = inviterName ? `\u0644\u0642\u062F \u062F\u0639\u0627\u0643 \u0635\u062F\u064A\u0642\u0643 ${inviterName} \u0644\u0644\u0627\u0646\u0636\u0645\u0627\u0645 \u0625\u0644\u0649 \u0635\u0641\u0648\u0641 StitchLab!` : `\u0644\u0642\u062F \u062F\u0639\u0627\u0643 \u0635\u062F\u064A\u0642\u0643 \u0644\u0644\u0627\u0646\u0636\u0645\u0627\u0645 \u0625\u0644\u0649 \u0635\u0641\u0648\u0641 StitchLab!`;
+    const description = `\u0627\u0636\u063A\u0637 \u0647\u0646\u0627 \u0644\u0642\u0628\u0648\u0644 \u0627\u0644\u062F\u0639\u0648\u0629 \u0648\u0627\u0644\u0628\u062F\u0621 \u0641\u064A \u0627\u0644\u062A\u062D\u062F\u064A \u0627\u0644\u062F\u0631\u0627\u0633\u064A`;
+    const image = previewImage || "https://raw.githubusercontent.com/stitchlab1/stitchlab2/0ceec11a5ca77c5d4607a90cab424bc9ec880155/stitchlab_icon_hd.png";
+    const protocol = req.protocol;
+    const host = req.get("host");
+    const fullUrl = `${protocol}://${host}${req.originalUrl || req.url}`;
+    const ogTags = `
     <!-- Dynamically Injected Open Graph tags by StitchLab server -->
     <meta property="og:type" content="website" />
     <meta property="og:title" content="${title}" />
@@ -57,14 +90,22 @@ app.get("/", (req, res, next) => {
     <meta name="twitter:title" content="${title}" />
     <meta name="twitter:description" content="${description}" />
     <meta name="twitter:image" content="${image}" />
-      `;
-      html = html.replace("<head>", `<head>${ogTags}`);
-      res.setHeader("Content-Type", "text/html; charset=utf-8");
-      res.send(html);
-      return;
-    }
+    `;
+    html = html.replace("<head>", `<head>${ogTags}`);
   }
-  next();
+  const nonce = res.locals.nonce;
+  if (nonce && isProd) {
+    html = html.replace(/<script/g, `<script nonce="${nonce}"`);
+  }
+  res.setHeader("Content-Type", "text/html; charset=utf-8");
+  res.send(html);
+};
+app.get("/", (req, res, next) => {
+  if (process.env.NODE_ENV === "production") {
+    serveIndexHtml(req, res);
+  } else {
+    next();
+  }
 });
 var aiClient = null;
 function getGeminiClient() {
@@ -312,6 +353,156 @@ No markdown code fences. Strictly output valid JSON.
     res.status(500).json({ error: error.message || "An error occurred with the AI model" });
   }
 });
+var DATA_DIR = import_path.default.join(process.cwd(), "data");
+if (!import_fs.default.existsSync(DATA_DIR)) {
+  import_fs.default.mkdirSync(DATA_DIR, { recursive: true });
+}
+var DEVICES_STORE_FILE = import_path.default.join(DATA_DIR, "device-tracker-store.json");
+function loadDevicesStore() {
+  try {
+    if (import_fs.default.existsSync(DEVICES_STORE_FILE)) {
+      const content = import_fs.default.readFileSync(DEVICES_STORE_FILE, "utf-8");
+      return JSON.parse(content);
+    }
+  } catch (err) {
+    console.error("Failed to read devices store file:", err);
+  }
+  const defaultStore = {
+    "stitchlab2027@gmail.com": {
+      userId: "stitchlab2027@gmail.com",
+      devices: {
+        "dev_chrome_android_sample": {
+          deviceId: "dev_chrome_android_sample",
+          deviceName: "Chrome on Android",
+          totalSeconds: 3840,
+          // ~ 1 hour 4 mins
+          lastActive: Date.now() - 1e3 * 60 * 60 * 26,
+          // yesterday
+          lastSyncedAt: Date.now() - 1e3 * 60 * 60 * 26
+        },
+        "dev_chrome_win_sample": {
+          deviceId: "dev_chrome_win_sample",
+          deviceName: "Chrome on Windows",
+          totalSeconds: 5520,
+          // ~ 1 hour 32 mins
+          lastActive: Date.now() - 1e3 * 60 * 60 * 5,
+          // 5 hours ago
+          lastSyncedAt: Date.now() - 1e3 * 60 * 60 * 5
+        }
+      },
+      lastUpdated: Date.now()
+    }
+  };
+  try {
+    import_fs.default.writeFileSync(DEVICES_STORE_FILE, JSON.stringify(defaultStore, null, 2), "utf-8");
+  } catch (e) {
+  }
+  return defaultStore;
+}
+function saveDevicesStore(store) {
+  try {
+    import_fs.default.writeFileSync(DEVICES_STORE_FILE, JSON.stringify(store, null, 2), "utf-8");
+  } catch (err) {
+    console.error("Failed to persist devices store:", err);
+  }
+}
+var devicesStore = loadDevicesStore();
+app.post("/api/time-tracker/sync", (req, res) => {
+  try {
+    let payload = req.body;
+    if (typeof payload === "string") {
+      try {
+        payload = JSON.parse(payload);
+      } catch {
+      }
+    }
+    const {
+      userId,
+      deviceId,
+      deviceName,
+      deltaSeconds,
+      deviceTotalSeconds,
+      sessionSeconds,
+      timestamp
+    } = payload || {};
+    const normalizedUserId = String(userId || "stitchlab2027@gmail.com").trim().toLowerCase();
+    const effectiveDeviceId = String(deviceId || "dev_current_chrome").trim();
+    const effectiveDeviceName = String(deviceName || "Google Chrome").trim();
+    const addedSeconds = Math.max(0, Number(deltaSeconds) || 0);
+    const reportedDeviceTotal = Number(deviceTotalSeconds) || 0;
+    if (!devicesStore[normalizedUserId]) {
+      devicesStore[normalizedUserId] = {
+        userId: normalizedUserId,
+        devices: {},
+        lastUpdated: Date.now()
+      };
+    }
+    const userEntry = devicesStore[normalizedUserId];
+    if (!userEntry.devices[effectiveDeviceId]) {
+      userEntry.devices[effectiveDeviceId] = {
+        deviceId: effectiveDeviceId,
+        deviceName: effectiveDeviceName,
+        totalSeconds: 0,
+        lastActive: timestamp || Date.now(),
+        lastSyncedAt: Date.now()
+      };
+    }
+    const deviceRecord = userEntry.devices[effectiveDeviceId];
+    deviceRecord.deviceName = effectiveDeviceName;
+    deviceRecord.lastActive = timestamp || Date.now();
+    deviceRecord.lastSyncedAt = Date.now();
+    if (addedSeconds > 0) {
+      deviceRecord.totalSeconds += addedSeconds;
+    }
+    if (reportedDeviceTotal > deviceRecord.totalSeconds) {
+      deviceRecord.totalSeconds = reportedDeviceTotal;
+    }
+    userEntry.lastUpdated = Date.now();
+    saveDevicesStore(devicesStore);
+    const devicesList = Object.values(userEntry.devices);
+    const aggregatedTotalSeconds = devicesList.reduce((acc, dev) => acc + (dev.totalSeconds || 0), 0);
+    res.status(200).json({
+      success: true,
+      message: "Device batch sync processed successfully",
+      userId: normalizedUserId,
+      deviceId: effectiveDeviceId,
+      deviceName: effectiveDeviceName,
+      deviceTotalSeconds: deviceRecord.totalSeconds,
+      aggregatedTotalSeconds,
+      devices: devicesList,
+      syncedAt: Date.now()
+    });
+  } catch (error) {
+    console.error("Time Tracker Sync Error:", error);
+    res.status(500).json({ error: "Failed to process device time sync" });
+  }
+});
+app.get("/api/time-tracker/devices", (req, res) => {
+  try {
+    const rawUserId = String(req.query.userId || "stitchlab2027@gmail.com").trim().toLowerCase();
+    const userEntry = devicesStore[rawUserId];
+    if (!userEntry || !userEntry.devices) {
+      res.status(200).json({
+        success: true,
+        userId: rawUserId,
+        aggregatedTotalSeconds: 0,
+        devices: []
+      });
+      return;
+    }
+    const devicesList = Object.values(userEntry.devices);
+    const aggregatedTotalSeconds = devicesList.reduce((acc, dev) => acc + (dev.totalSeconds || 0), 0);
+    res.status(200).json({
+      success: true,
+      userId: rawUserId,
+      aggregatedTotalSeconds,
+      devices: devicesList
+    });
+  } catch (error) {
+    console.error("Error fetching user devices:", error);
+    res.status(500).json({ error: "Failed to fetch device list" });
+  }
+});
 app.get("/auth/callback", (req, res) => {
   res.send(`
     <!DOCTYPE html>
@@ -424,7 +615,8 @@ app.get("/auth/callback", (req, res) => {
   `);
 });
 async function startServer() {
-  if (process.env.NODE_ENV !== "production") {
+  const hasSrc = import_fs.default.existsSync(import_path.default.join(process.cwd(), "src", "main.tsx"));
+  if (process.env.NODE_ENV !== "production" && hasSrc) {
     const vite = await (0, import_vite.createServer)({
       server: { middlewareMode: true },
       appType: "spa"
@@ -432,9 +624,20 @@ async function startServer() {
     app.use(vite.middlewares);
   } else {
     const distPath = import_path.default.join(process.cwd(), "dist");
-    app.use(import_express.default.static(distPath));
+    app.use(import_express.default.static(distPath, {
+      index: false,
+      maxAge: "31536000s",
+      // 1 year cache
+      setHeaders: (res, path2) => {
+        if (path2.match(/\.(jpg|jpeg|png|gif|webp|svg|ico)$/i)) {
+          res.setHeader("Cache-Control", "public, max-age=31536000, immutable");
+        } else {
+          res.setHeader("Cache-Control", "public, max-age=3600");
+        }
+      }
+    }));
     app.get("*", (req, res) => {
-      res.sendFile(import_path.default.join(distPath, "index.html"));
+      serveIndexHtml(req, res);
     });
   }
   app.listen(PORT, "0.0.0.0", () => {
@@ -442,4 +645,3 @@ async function startServer() {
   });
 }
 startServer();
-//# sourceMappingURL=server.cjs.map

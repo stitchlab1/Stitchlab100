@@ -305,7 +305,7 @@ export default function App() {
   const [isGeneratingAcademyInvite, setIsGeneratingAcademyInvite] = useState<boolean>(false);
   const [academyInviteUrl, setAcademyInviteUrl] = useState<string>("");
   const [academyInviteImage, setAcademyInviteImage] = useState<string>("");
-  const [classmates, setClassmates] = useState<{ uid: string; name: string; email: string; joinedAt: string }[]>([]);
+  const [classmates, setClassmates] = useState<{ uid: string; name: string; email: string; joinedAt: string; studentSemester?: string; completedWordsCount?: number; completedGroupsCount?: number }[]>([]);
   const [isEditingName, setIsEditingName] = useState<boolean>(false);
   const [showNameEditLockHint, setShowNameEditLockHint] = useState<boolean>(false);
   const [editingNameValue, setEditingNameValue] = useState<string>("");
@@ -525,6 +525,18 @@ export default function App() {
   const [showSettingsModal, setShowSettingsModal] = useState<boolean>(false);
   const [changeEmailViewOpen, setChangeEmailViewOpen] = useState<boolean>(false);
   const [appToast, setAppToast] = useState<{ id: number; message: string; type: "success" | "error" | "info" } | null>(null);
+
+  const [accountTypeVersion, setAccountTypeVersion] = useState<number>(0);
+
+  useEffect(() => {
+    const handleAccountTypeChanged = () => {
+      setAccountTypeVersion((prev) => prev + 1);
+    };
+    window.addEventListener("stitchlab_account_type_changed", handleAccountTypeChanged);
+    return () => {
+      window.removeEventListener("stitchlab_account_type_changed", handleAccountTypeChanged);
+    };
+  }, []);
 
   const triggerAppToast = (message: string, type: "success" | "error" | "info" = "info") => {
     setAppToast({ id: Date.now(), message, type });
@@ -1264,7 +1276,7 @@ export default function App() {
       const backup = await getBackupContent(finalToken, file.id);
         if (backup) {
           // Apply state restorers!
-          setUserLevel(backup.Level || "Intermediate");
+          setUserLevel((backup.Level as any) || "Intermediate");
           setCustomFlashcards(backup.SavedWords || []);
           if (backup.WordCounter) {
             setCompletedWordsCount(backup.WordCounter.completedWordsCount || 0);
@@ -1869,6 +1881,12 @@ export default function App() {
     try {
       const { sendPasswordResetEmail } = await import("firebase/auth");
       await sendPasswordResetEmail(auth, email);
+      if (auth.currentUser?.uid) {
+        localStorage.setItem(`stitchlab_pwd_extracted_${auth.currentUser.uid}`, "true");
+        window.dispatchEvent(new CustomEvent("stitchlab_account_type_changed", {
+          detail: { uid: auth.currentUser.uid, hasPassword: true }
+        }));
+      }
       setAuthSuccessMessage("تم إرسال رابط/كود إعادة تعيين كلمة المرور بنجاح! يرجى التحقق من بريدك الإلكتروني (والرسائل غير المرغوب فيها Spam) وتغيير كلمة المرور بنجاح.");
     } catch (err: any) {
       console.error("Password reset error:", err);
@@ -4150,7 +4168,22 @@ export default function App() {
                           </div>
                         </div>
                         <span className="text-[9.5px] font-black px-2 py-0.5 rounded-lg bg-white border border-purple-150 text-purple-700 shadow-2xs">
-                          {auth.currentUser.providerData.some(p => p.providerId === "google.com") ? "حساب Google 🌐" : "بريد وكلمة مرور 🔑"}
+                          {(() => {
+                            const pData = auth.currentUser?.providerData || [];
+                            const hasG = pData.some((p) => p.providerId === "google.com");
+                            const hasP = pData.some((p) => p.providerId === "password");
+                            const isExtracted = typeof window !== "undefined" && auth.currentUser?.uid && localStorage.getItem(`stitchlab_pwd_extracted_${auth.currentUser.uid}`) === "true";
+                            if (hasG && (hasP || isExtracted)) {
+                              return "حساب مسجل بقوقل وكلمة مرور 🌐🔑";
+                            }
+                            if (hasG) {
+                              return "حساب مسجل بقوقل 🌐";
+                            }
+                            if (hasP) {
+                              return "بريد وكلمة مرور 🔑";
+                            }
+                            return "حساب مسجل";
+                          })()}
                         </span>
                       </div>
 
@@ -4566,7 +4599,7 @@ export default function App() {
                   localStorage.removeItem("stitchlab_academy_invite_id");
                   localStorage.removeItem("stitchlab_academy_inviter_name");
                   setPendingAcademyInvite(null);
-                  setMainTab("learning"); // Go to main interface (Home)
+                  setMainTab("home"); // Go to main interface (Home)
                   alert("تم تخطي الانضمام؛ نأخذك الآن للواجهة الرئيسية.");
                 }}
                 className="w-full bg-slate-100 hover:bg-slate-200 text-slate-500 text-xs font-black py-3 px-4 rounded-xl cursor-pointer transition-all active:scale-95"
