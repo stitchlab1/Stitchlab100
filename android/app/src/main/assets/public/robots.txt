@@ -1,5 +1,0 @@
-User-agent: *
-Allow: /
-
-Sitemap: https://stitchlab.net/sitemap.xml
-Sitemap: https://ais-pre-47zz4tioi3bj5n7nyd4sos-220375696903.europe-west2.run.app/sitemap.xml

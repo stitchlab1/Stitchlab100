@@ -12,7 +12,6 @@ const app = express();
 const PORT = 3000;
 
 app.use(express.json());
-app.use(express.text({ type: ['text/plain', 'text/*'] }));
 
 // Security Headers & Nonce generation middleware (active for production)
 app.use((req, res, next) => {
@@ -54,8 +53,7 @@ app.use((req, res, next) => {
 // Helper to serve index.html with dynamically injected nonces and Open Graph tags
 const serveIndexHtml = (req: express.Request, res: express.Response) => {
   const isProd = process.env.NODE_ENV === "production";
-  const hasDist = fs.existsSync(path.join(process.cwd(), "dist", "index.html"));
-  const baseDir = (isProd || hasDist) ? "dist" : ".";
+  const baseDir = isProd ? "dist" : ".";
   const filePath = path.join(process.cwd(), baseDir, "index.html");
 
   if (!fs.existsSync(filePath)) {
@@ -383,201 +381,6 @@ No markdown code fences. Strictly output valid JSON.
   }
 });
 
-// Persistent Per-Device Time Tracker Store (File-backed for high durability & zero DB costs)
-interface DeviceRecord {
-  deviceId: string;
-  deviceName: string;
-  totalSeconds: number;
-  lastActive: number;
-  lastSyncedAt: number;
-}
-
-interface UserTrackerStore {
-  [userId: string]: {
-    userId: string;
-    devices: { [deviceId: string]: DeviceRecord };
-    lastUpdated: number;
-  };
-}
-
-const DATA_DIR = path.join(process.cwd(), "data");
-if (!fs.existsSync(DATA_DIR)) {
-  fs.mkdirSync(DATA_DIR, { recursive: true });
-}
-const DEVICES_STORE_FILE = path.join(DATA_DIR, "device-tracker-store.json");
-
-function loadDevicesStore(): UserTrackerStore {
-  try {
-    if (fs.existsSync(DEVICES_STORE_FILE)) {
-      const content = fs.readFileSync(DEVICES_STORE_FILE, "utf-8");
-      return JSON.parse(content);
-    }
-  } catch (err) {
-    console.error("Failed to read devices store file:", err);
-  }
-
-  // Pre-seed default realistic sample data for stitchlab2027@gmail.com if empty
-  const defaultStore: UserTrackerStore = {
-    "stitchlab2027@gmail.com": {
-      userId: "stitchlab2027@gmail.com",
-      devices: {
-        "dev_chrome_android_sample": {
-          deviceId: "dev_chrome_android_sample",
-          deviceName: "Chrome on Android",
-          totalSeconds: 3840, // ~ 1 hour 4 mins
-          lastActive: Date.now() - 1000 * 60 * 60 * 26, // yesterday
-          lastSyncedAt: Date.now() - 1000 * 60 * 60 * 26,
-        },
-        "dev_chrome_win_sample": {
-          deviceId: "dev_chrome_win_sample",
-          deviceName: "Chrome on Windows",
-          totalSeconds: 5520, // ~ 1 hour 32 mins
-          lastActive: Date.now() - 1000 * 60 * 60 * 5, // 5 hours ago
-          lastSyncedAt: Date.now() - 1000 * 60 * 60 * 5,
-        }
-      },
-      lastUpdated: Date.now(),
-    }
-  };
-
-  try {
-    fs.writeFileSync(DEVICES_STORE_FILE, JSON.stringify(defaultStore, null, 2), "utf-8");
-  } catch (e) {}
-
-  return defaultStore;
-}
-
-function saveDevicesStore(store: UserTrackerStore): void {
-  try {
-    fs.writeFileSync(DEVICES_STORE_FILE, JSON.stringify(store, null, 2), "utf-8");
-  } catch (err) {
-    console.error("Failed to persist devices store:", err);
-  }
-}
-
-// In-memory cache loaded once
-let devicesStore: UserTrackerStore = loadDevicesStore();
-
-// 4. Scalable & Free-Tier Friendly Time Tracker Sync Endpoint (Per-Device & Lazy Batch Sync)
-app.post("/api/time-tracker/sync", (req, res) => {
-  try {
-    let payload = req.body;
-    if (typeof payload === "string") {
-      try {
-        payload = JSON.parse(payload);
-      } catch {
-        // Keep as is if parsing fails
-      }
-    }
-
-    const {
-      userId,
-      deviceId,
-      deviceName,
-      deltaSeconds,
-      deviceTotalSeconds,
-      sessionSeconds,
-      timestamp,
-    } = payload || {};
-
-    const normalizedUserId = String(userId || "stitchlab2027@gmail.com").trim().toLowerCase();
-    const effectiveDeviceId = String(deviceId || "dev_current_chrome").trim();
-    const effectiveDeviceName = String(deviceName || "Google Chrome").trim();
-    const addedSeconds = Math.max(0, Number(deltaSeconds) || 0);
-    const reportedDeviceTotal = Number(deviceTotalSeconds) || 0;
-
-    // Find or initialize user entry
-    if (!devicesStore[normalizedUserId]) {
-      devicesStore[normalizedUserId] = {
-        userId: normalizedUserId,
-        devices: {},
-        lastUpdated: Date.now(),
-      };
-    }
-
-    const userEntry = devicesStore[normalizedUserId];
-
-    // Find or initialize device entry
-    if (!userEntry.devices[effectiveDeviceId]) {
-      userEntry.devices[effectiveDeviceId] = {
-        deviceId: effectiveDeviceId,
-        deviceName: effectiveDeviceName,
-        totalSeconds: 0,
-        lastActive: timestamp || Date.now(),
-        lastSyncedAt: Date.now(),
-      };
-    }
-
-    const deviceRecord = userEntry.devices[effectiveDeviceId];
-    deviceRecord.deviceName = effectiveDeviceName;
-    deviceRecord.lastActive = timestamp || Date.now();
-    deviceRecord.lastSyncedAt = Date.now();
-
-    // Increment device total seconds or use the maximum reported
-    if (addedSeconds > 0) {
-      deviceRecord.totalSeconds += addedSeconds;
-    }
-    if (reportedDeviceTotal > deviceRecord.totalSeconds) {
-      deviceRecord.totalSeconds = reportedDeviceTotal;
-    }
-
-    userEntry.lastUpdated = Date.now();
-
-    // Persist changes
-    saveDevicesStore(devicesStore);
-
-    // Compute aggregated total across all devices
-    const devicesList = Object.values(userEntry.devices);
-    const aggregatedTotalSeconds = devicesList.reduce((acc, dev) => acc + (dev.totalSeconds || 0), 0);
-
-    res.status(200).json({
-      success: true,
-      message: "Device batch sync processed successfully",
-      userId: normalizedUserId,
-      deviceId: effectiveDeviceId,
-      deviceName: effectiveDeviceName,
-      deviceTotalSeconds: deviceRecord.totalSeconds,
-      aggregatedTotalSeconds,
-      devices: devicesList,
-      syncedAt: Date.now(),
-    });
-  } catch (error: any) {
-    console.error("Time Tracker Sync Error:", error);
-    res.status(500).json({ error: "Failed to process device time sync" });
-  }
-});
-
-// 5. Get all registered devices and learning time breakdown for a student/email
-app.get("/api/time-tracker/devices", (req, res) => {
-  try {
-    const rawUserId = String(req.query.userId || "stitchlab2027@gmail.com").trim().toLowerCase();
-    const userEntry = devicesStore[rawUserId];
-
-    if (!userEntry || !userEntry.devices) {
-      res.status(200).json({
-        success: true,
-        userId: rawUserId,
-        aggregatedTotalSeconds: 0,
-        devices: [],
-      });
-      return;
-    }
-
-    const devicesList = Object.values(userEntry.devices);
-    const aggregatedTotalSeconds = devicesList.reduce((acc, dev) => acc + (dev.totalSeconds || 0), 0);
-
-    res.status(200).json({
-      success: true,
-      userId: rawUserId,
-      aggregatedTotalSeconds,
-      devices: devicesList,
-    });
-  } catch (error: any) {
-    console.error("Error fetching user devices:", error);
-    res.status(500).json({ error: "Failed to fetch device list" });
-  }
-});
-
 // Google Drive OAuth 2.0 Callback handler page for Client-Side Access Token parsing
 app.get('/auth/callback', (req, res) => {
   res.send(`
@@ -693,8 +496,7 @@ app.get('/auth/callback', (req, res) => {
 
 // Vite/Static assets server configuration
 async function startServer() {
-  const hasSrc = fs.existsSync(path.join(process.cwd(), "src", "main.tsx"));
-  if (process.env.NODE_ENV !== "production" && hasSrc) {
+  if (process.env.NODE_ENV !== "production") {
     const vite = await createViteServer({
       server: { middlewareMode: true },
       appType: "spa",
