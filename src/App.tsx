@@ -19,10 +19,8 @@ import {
   Copy,
   Settings,
   Cloud,
-  Pen,
-  ShieldCheck
+  Pen
 } from "lucide-react";
-import ChangeEmailSection from "./components/ChangeEmailSection";
 import { 
   Persona, 
   ChatMessage, 
@@ -523,21 +521,6 @@ export default function App() {
   const [isOnline, setIsOnline] = useState<boolean>(() => typeof window !== "undefined" ? window.navigator.onLine : true);
   const [showSyncModal, setShowSyncModal] = useState<boolean>(false);
   const [showSettingsModal, setShowSettingsModal] = useState<boolean>(false);
-  const [changeEmailViewOpen, setChangeEmailViewOpen] = useState<boolean>(false);
-  const [appToast, setAppToast] = useState<{ id: number; message: string; type: "success" | "error" | "info" } | null>(null);
-
-  const triggerAppToast = (message: string, type: "success" | "error" | "info" = "info") => {
-    setAppToast({ id: Date.now(), message, type });
-  };
-
-  useEffect(() => {
-    if (!appToast) return;
-    const timer = setTimeout(() => {
-      setAppToast(null);
-    }, 6500);
-    return () => clearTimeout(timer);
-  }, [appToast]);
-
   const [showSkippedWordsList, setShowSkippedWordsList] = useState<boolean>(false);
   const [syncInputCode, setSyncInputCode] = useState<string>("");
   const [currentSyncCode, setCurrentSyncCode] = useState<string>("");
@@ -3934,33 +3917,6 @@ export default function App() {
         </div>
       )}
 
-      {/* 🌟 GLOBAL APP TOAST NOTIFICATION */}
-      {appToast && (
-        <div className="fixed top-5 left-1/2 -translate-x-1/2 z-[9999] max-w-md w-[92%] sm:w-auto animate-bounce-in" dir="rtl">
-          <div className={`p-4 rounded-2xl shadow-2xl border flex items-center gap-3 backdrop-blur-xl ${
-            appToast.type === "success" 
-              ? "bg-emerald-950/95 text-emerald-100 border-emerald-500/40 shadow-emerald-900/30" 
-              : appToast.type === "error"
-              ? "bg-rose-950/95 text-rose-100 border-rose-500/40 shadow-rose-900/30"
-              : "bg-purple-950/95 text-purple-100 border-purple-500/40 shadow-purple-900/30"
-          }`}>
-            <span className="text-xl">
-              {appToast.type === "success" ? "✅" : appToast.type === "error" ? "⚠️" : "ℹ️"}
-            </span>
-            <p className="text-xs sm:text-sm font-extrabold flex-1 leading-snug">
-              {appToast.message}
-            </p>
-            <button 
-              onClick={() => setAppToast(null)}
-              className="text-white/60 hover:text-white p-1 rounded-lg cursor-pointer text-xs"
-              title="إغلاق التنبيه"
-            >
-              ✕
-            </button>
-          </div>
-        </div>
-      )}
-
       {/* 4. UNIFIED SETTINGS GEAR MODAL */}
       {showSettingsModal && (
         <div className="fixed inset-0 bg-slate-900/60 backdrop-blur-md z-50 flex items-center justify-center p-4 text-slate-800" dir="rtl">
@@ -3970,19 +3926,13 @@ export default function App() {
               onClick={() => {
                 setShowSettingsModal(false);
                 setAcademyViewOpen(false);
-                setChangeEmailViewOpen(false);
               }}
               className="absolute top-4 left-4 p-2 text-slate-400 hover:text-slate-600 hover:bg-slate-100 rounded-full cursor-pointer transition-colors text-sm font-bold"
             >
               ✕
             </button>
 
-            {changeEmailViewOpen ? (
-              <ChangeEmailSection
-                onBack={() => setChangeEmailViewOpen(false)}
-                showToast={triggerAppToast}
-              />
-            ) : academyViewOpen ? (
+            {academyViewOpen ? (
               <div className="space-y-4 animate-fadeIn">
                 {/* Academy Sub-header */}
                 <div className="flex items-center justify-between border-b border-slate-100 pb-3">
@@ -4134,51 +4084,6 @@ export default function App() {
                 </div>
 
                 <div className="grid grid-cols-1 gap-4">
-                  {/* Account Settings & Security Block (إعدادات الحساب والأمان) */}
-                  {auth.currentUser && (
-                    <div className="p-4 rounded-2xl border border-purple-200/90 bg-gradient-to-br from-purple-50/70 via-pink-50/30 to-white space-y-3 text-right shadow-xs">
-                      <div className="flex items-center justify-between pb-2.5 border-b border-purple-150/60">
-                        <div className="flex items-center gap-2.5">
-                          <div className="w-8 h-8 rounded-xl bg-purple-100 text-purple-700 flex items-center justify-center text-sm shadow-2xs">
-                            <ShieldCheck className="w-4 h-4" />
-                          </div>
-                          <div>
-                            <h4 className="text-xs font-black text-purple-950">إعدادات الحساب والأمان</h4>
-                            <span className="text-[10px] text-slate-500 font-bold block truncate max-w-[200px]" dir="ltr">
-                              {auth.currentUser.email || "حساب الطالب المسجل"}
-                            </span>
-                          </div>
-                        </div>
-                        <span className="text-[9.5px] font-black px-2 py-0.5 rounded-lg bg-white border border-purple-150 text-purple-700 shadow-2xs">
-                          {auth.currentUser.providerData.some(p => p.providerId === "google.com") ? "حساب Google 🌐" : "بريد وكلمة مرور 🔑"}
-                        </span>
-                      </div>
-
-                      {/* Option / Card: Change Email Address (تغيير البريد الإلكتروني) */}
-                      <button
-                        type="button"
-                        onClick={() => setChangeEmailViewOpen(true)}
-                        className="w-full flex items-center justify-between p-3 rounded-xl bg-white hover:bg-purple-50/60 border border-purple-100 hover:border-purple-300 transition-all text-right cursor-pointer group active:scale-[0.98] shadow-xs"
-                      >
-                        <div className="flex items-center gap-2.5">
-                          <div className="w-8 h-8 rounded-lg bg-pink-100 text-pink-700 flex items-center justify-center text-sm group-hover:scale-110 transition-transform">
-                            ✉️
-                          </div>
-                          <div className="text-right">
-                            <h5 className="text-xs font-black text-purple-950">تغيير البريد الإلكتروني</h5>
-                            <span className="text-[10px] text-slate-400 font-bold block">
-                              {auth.currentUser.email ? `الحالي: ${auth.currentUser.email}` : "تحديث بريدك الإلكتروني المعتمد"}
-                            </span>
-                          </div>
-                        </div>
-                        <div className="flex items-center gap-1 text-purple-600 font-black text-xs group-hover:-translate-x-1 transition-transform">
-                          <span>تعديل</span>
-                          <span className="text-sm">←</span>
-                        </div>
-                      </button>
-                    </div>
-                  )}
-
                   {/* Option 1: Student Unique ID with Copy button */}
                   {auth.currentUser?.uid && (
                     <div className="w-full flex items-center justify-between p-4 rounded-2xl border border-purple-100 bg-purple-50/20 text-right">
