@@ -1,0 +1,6 @@
+{
+  "name": "stitchLab",
+  "description": "منصة تفاعلية ذكية لتعلم وإتقان اللغة الإنجليزية بدعم من الذكاء الاصطناعي ومحادثات ومحلل قواعد متكامل للمتحدثين بالعربية",
+  "requestFramePermissions": ["microphone"],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

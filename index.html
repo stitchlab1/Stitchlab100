@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    
+    <!-- SEO Meta Tags -->
+    <title>StitchLab • منصة تفاعلية ذكية لتعلم وإتقان اللغة الإنجليزية</title>
+    <meta name="description" content="منصة StitchLab هي منصة تفاعلية ذكية لتعلم وإتقان اللغة الإنجليزية بدعم من الذكاء الاصطناعي ومحادثات ومحلل قواعد متكامل للمتحدثين بالعربية لجميع المستويات الدراسية." />
+    <meta name="keywords" content="StitchLab, Stitch Lab, StitchLab English, ستيتش لاب, ستيتش لاب لتعلم الانجليزية, تعلم الانجليزية, منصة ستيتش لاب, تعلم اللغة الانجليزية مجانا" />
+    <meta name="author" content="StitchLab" />
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="StitchLab" />
+    <meta property="og:title" content="StitchLab • منصة تفاعلية ذكية لتعلم وإتقان اللغة الإنجليزية" />
+    <meta property="og:description" content="منصة تفاعلية ذكية لتعلم وإتقان اللغة الإنجليزية بدعم من الذكاء الاصطناعي ومحادثات ومحلل قواعد متكامل للمتحدثين بالعربية." />
+    <meta property="og:image" content="https://raw.githubusercontent.com/stitchlab1/stitchlab2/0ceec11a5ca77c5d4607a90cab424bc9ec880155/stitchlab_icon_hd.png" />
+    <meta property="og:locale" content="ar_AR" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="StitchLab • منصة تفاعلية ذكية لتعلم وإتقان اللغة الإنجليزية" />
+    <meta name="twitter:description" content="منصة تفاعلية ذكية لتعلم وإتقان اللغة الإنجليزية بدعم من الذكاء الاصطناعي ومحادثات ومحلل قواعد متكامل للمتحدثين بالعربية." />
+    <meta name="twitter:image" content="https://raw.githubusercontent.com/stitchlab1/stitchlab2/0ceec11a5ca77c5d4607a90cab424bc9ec880155/stitchlab_icon_hd.png" />
+
+    <!-- Canonical Link -->
+    <link rel="canonical" href="https://stitchlab.net/" id="canonical-link" />
+    <script>
+      // Dynamically update canonical link with the current hostname if applicable
+      try {
+        if (window.location.hostname && window.location.hostname !== "localhost") {
+          document.getElementById('canonical-link').setAttribute('href', window.location.origin + '/');
+        }
+      } catch (e) {}
+    </script>
+
+    <!-- Google Search Structured Data (JSON-LD) -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "StitchLab",
+        "alternateName": [
+          "Stitch Lab",
+          "ستيتش لاب",
+          "منصة ستيتش لاب"
+        ],
+        "description": "منصة تفاعلية ذكية لتعلم وإتقان اللغة الإنجليزية بدعم من الذكاء الاصطناعي ومحادثات ومحلل قواعد متكامل للمتحدثين بالعربية",
+        "url": "https://stitchlab.net/",
+        "applicationCategory": "EducationalApplication",
+        "operatingSystem": "All",
+        "genre": "Language Learning",
+        "inLanguage": "ar",
+        "offers": {
+          "@type": "Offer",
+          "price": "0.00",
+          "priceCurrency": "USD"
+        }
+      }
+    </script>
+
+    <link rel="manifest" href="/manifest.json" />
+    <link rel="icon" type="image/png" href="/stitchlab_icon_hd.png" />
+    <link rel="apple-touch-icon" href="/stitchlab_icon_hd.png" />
+    <meta name="theme-color" content="#9B59B6" />
+    
+    <!-- PWA & Mobile Web App Standalone Meta Tags -->
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="StitchLab" />
+    <meta name="application-name" content="StitchLab" />
+    <meta name="msapplication-TileColor" content="#9B59B6" />
+    <meta name="msapplication-starturl" content="/" />
+    
+    <meta name="google-site-verification" content="pO_oJDCS9_XZ53KYkfu3MTUEyfw4_OHd-AckzooZoBI" />
+  </head>
+  <body class="bg-[#FDF2F9] text-slate-900 overflow-x-hidden select-none">
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+
+    <script>
+      // Cleanly register the ultra-lightweight Service Worker for native PWA installation support
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('/service-worker.js')
+            .then(reg => {
+              console.log('StitchLab PWA Service Worker Registered successfully!', reg.scope);
+            })
+            .catch(err => {
+              console.error('Service Worker Registry Bypassed:', err);
+            });
+        });
+      }
+
+      // Defer installation prompt
+      window.deferredInstallPrompt = null;
+      window.deferredPrompt = null;
+      window.addEventListener('beforeinstallprompt', (e) => {
+        // Prevent Chrome 67 and earlier from automatically showing the prompt
+        e.preventDefault();
+        // Stash the event so it can be triggered later.
+        window.deferredInstallPrompt = e;
+        window.deferredPrompt = e;
+        
+        // Dispatch a custom event to notify our React app that PWA installation is ready!
+        const event = new CustomEvent('pwa-installable', { detail: e });
+        window.dispatchEvent(event);
+      });
+    </script>
+  </body>
+</html>
+

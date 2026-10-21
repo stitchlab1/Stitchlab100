@@ -1,0 +1,32 @@
+{
+  "name": "StitchLab",
+  "short_name": "StitchLab",
+  "description": "منصة تفاعلية ذكية لتعلم وإتقان اللغة الإنجليزية بدعم من الذكاء الاصطناعي ومحادثات ومحلل قواعد متكامل للمتحدثين بالعربية",
+  "start_url": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#1F112D",
+  "theme_color": "#CDFF00",
+  "id": "/stitchlab/",
+  "categories": [ "education", "language" ],
+  "icons": [
+    {
+      "src": "https://raw.githubusercontent.com/stitchlab1/stitchlab2/0ceec11a5ca77c5d4607a90cab424bc9ec880155/stitchlab_icon_hd.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "https://raw.githubusercontent.com/stitchlab1/stitchlab2/0ceec11a5ca77c5d4607a90cab424bc9ec880155/stitchlab_icon_hd.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "related_applications": [
+    {
+      "platform": "play",
+      "id": "com.stitchlab.app"
+    }
+  ]
+}

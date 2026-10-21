@@ -1,0 +1,27 @@
+{
+  "expo": {
+    "name": "StitchLab",
+    "slug": "stitchlab",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./stitchlab_icon_hd.png",
+    "userInterfaceStyle": "light",
+    "splash": {
+      "image": "./stitchlab_icon_hd.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./stitchlab_icon_hd.png",
+        "backgroundColor": "#ffffff"
+      },
+      "package": "com.stitchlab.app",
+      "permissions": [
+        "INTERNET"
+      ],
+      "logo": "./stitchlab_icon_hd.png"
+    },
+    "plugins": []
+  }
+}

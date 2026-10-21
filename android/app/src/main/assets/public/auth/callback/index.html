@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>تأكيد الاتصال بـ Google Drive | StitchLab</title>
+  <link rel="icon" href="https://raw.githubusercontent.com/stitchlab1/stitchlab2/0ceec11a5ca77c5d4607a90cab424bc9ec880155/stitchlab_icon_hd.png" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap');
+    body {
+      font-family: 'Cairo', sans-serif;
+    }
+  </style>
+</head>
+<body class="bg-[#fafdf5] text-slate-900 flex items-center justify-center min-h-screen p-4">
+  <div class="bg-white p-8 md:p-10 rounded-3xl shadow-xl border border-slate-100 max-w-md w-full text-center space-y-6">
+    <!-- App Logo/Icon -->
+    <div class="mx-auto w-20 h-20 bg-gradient-to-tr from-purple-500 to-pink-500 rounded-2xl flex items-center justify-center shadow-lg transform rotate-6 hover:rotate-12 transition-transform duration-350">
+      <img src="https://raw.githubusercontent.com/stitchlab1/stitchlab2/0ceec11a5ca77c5d4607a90cab424bc9ec880155/stitchlab_icon_hd.png" class="w-16 h-16 object-contain" alt="StitchLab" referrerPolicy="no-referrer">
+    </div>
+
+    <!-- Main Title & Status -->
+    <div class="space-y-2">
+      <h2 id="title" class="text-xl md:text-2xl font-black text-purple-950">جاري الاتصال بـ Google Drive...</h2>
+      <p id="desc" class="text-xs md:text-sm text-slate-500 font-medium leading-relaxed">
+        يرجى الانتظار بينما نقوم بمزامنة حسابك وتأمين التقدم الدراسي الخاص بك بسحابة Google الآمنة.
+      </p>
+    </div>
+
+    <!-- Spinner / Progress Indicator -->
+    <div id="progress-container" class="flex flex-col items-center justify-center py-4">
+      <div id="spinner" class="w-12 h-12 rounded-full border-4 border-purple-100 border-t-purple-600 animate-spin"></div>
+    </div>
+
+    <!-- Security Badging -->
+    <div class="border-t border-dashed border-slate-100 pt-5 space-y-2 text-[11px] text-slate-400 font-bold">
+      <div class="flex items-center justify-center gap-1.5 text-purple-900">
+        <span>🔒 أمان تضمنه عائلة Google</span>
+      </div>
+      <div>
+        باستخدام هذه الخدمة، فإنك توافق على 
+        <a href="https://stitchlab2.vercel.app/privacy-policy" target="_blank" class="text-purple-600 underline hover:text-purple-700">سياسة الخصوصية لـ StitchLab</a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function parseAndReply() {
+      // 1. Try to extract tokens from URL Hash or Search Params
+      // Implicit grant puts them after "#" or "?":
+      const hashStr = window.location.hash.substring(1);
+      const queryStr = window.location.search.substring(1);
+      const params = new URLSearchParams(hashStr || queryStr);
+      
+      const accessToken = params.get('access_token');
+      const authCode = params.get('code');
+      const errorMsg = params.get('error');
+
+      const titleEl = document.getElementById('title');
+      const descEl = document.getElementById('desc');
+      const spinnerEl = document.getElementById('spinner');
+
+      // If an error is returned directly by Google (e.g. access_denied)
+      if (errorMsg) {
+        console.error("OAuth Callback error message returned:", errorMsg);
+        titleEl.textContent = "صلاحيات غير مكتملة ⚠️";
+        descEl.textContent = "لم نتمكن من الحصول على صلاحية الوصول لـ Google Drive. يرجى إغلاق النافذة والمحاولة مجدداً.";
+        if (spinnerEl) spinnerEl.style.display = 'none';
+
+        if (window.opener) {
+          window.opener.postMessage({ type: 'OAUTH_AUTH_ERROR', error: errorMsg }, '*');
+        }
+        return;
+      }
+
+      // If we managed to acquire an Access Token (implicit/direct grant)
+      if (accessToken) {
+        // Save the token locally to ensure survival across sessions
+        localStorage.setItem("stitchlab_drive_token", accessToken);
+        
+        titleEl.textContent = "تم الاتصال بنجاح! 🎉";
+        descEl.textContent = "لقد تم ربط حسابك في StitchLab بمساحة Google Drive بنجاح. سيتم توجيهك الآن.";
+        
+        // Notify Parent Window (Popup flow)
+        if (window.opener) {
+          try {
+            window.opener.postMessage({ type: 'OAUTH_AUTH_SUCCESS', token: accessToken }, '*');
+            setTimeout(() => {
+              window.close();
+            }, 800);
+          } catch (e) {
+            console.error("Failed to post message directly to window.opener, trying redirect fallback:", e);
+            setTimeout(() => {
+              window.location.href = '/';
+            }, 1000);
+          }
+        } else {
+          // Direct redirect routing flow (e.g. if Google OAuth runs as full-page redirect)
+          // Equivalent of router.push('/dashboard') -> in StitchLab it redirects to home '/' where the Dashboard launches!
+          setTimeout(() => {
+            window.location.href = '/';
+          }, 1500);
+        }
+        return;
+      }
+
+      // If OAuth returns a code (Authorization Code Grant)
+      if (authCode) {
+        titleEl.textContent = "جاري تفعيل رمز الدخول الدراسي... ⏳";
+        descEl.textContent = "تم تزويدنا برمز الترخيص المؤقت من Google، نقوم بتحضير لوحة التحكم الخاصة بك حالياً.";
+        
+        // Save the code or proceed on parent window
+        if (window.opener) {
+          window.opener.postMessage({ type: 'OAUTH_AUTH_SUCCESS', token: authCode, isCode: true }, '*');
+          setTimeout(() => {
+            window.close();
+          }, 800);
+        } else {
+          // Since client lacks a backend client_secret to safely exchange codes directly without exposing secrets,
+          // redirect to home where the main application boots up and picks up the code from URL/localStorage
+          localStorage.setItem("stitchlab_drive_code", authCode);
+          setTimeout(() => {
+            window.location.href = '/';
+          }, 1500);
+        }
+        return;
+      }
+
+      // Mismatch or Fallback: No token and no code found in URL
+      console.warn("OAuth Callback triggered but found no access_token or code parameters.");
+      titleEl.textContent = "صلاحيات غير متوفرة";
+      descEl.textContent = "لم نتمكن من العثور على رمز الوصول إلى Google Drive. يرجى العودة للتطبيق وإعادة المحاولة.";
+      if (spinnerEl) spinnerEl.style.display = 'none';
+      
+      if (window.opener) {
+        window.opener.postMessage({ type: 'OAUTH_AUTH_ERROR', error: 'No token found in hash.' }, '*');
+      }
+    }
+
+    // Run parser upon page load
+    window.addEventListener('DOMContentLoaded', parseAndReply);
+  </script>
+</body>
+</html>

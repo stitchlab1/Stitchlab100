@@ -1,0 +1,84 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Global Safety Net (Default Deny)
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    // Hardened architectural security helpers
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function isOwner(userId) {
+      return isSignedIn() && request.auth.uid == userId;
+    }
+
+    function isValidId(id) {
+      return id is string && id.size() <= 128 && id.matches('^[a-zA-Z0-9_-]+$');
+    }
+
+    function isValidSyncCode(code) {
+      return code is string && code.size() == 6;
+    }
+
+    function isValidSyncCodeDoc(doc) {
+      return doc.keys().hasAll(['payload', 'userId', 'createdAt'])
+        && doc.keys().size() == 3
+        && doc.userId is string
+        && doc.userId == request.auth.uid
+        && doc.createdAt == request.time;
+    }
+
+    function incoming() {
+      return request.resource.data;
+    }
+
+    function isValidChallenge(data) {
+      return data.keys().hasAll(['challengerId', 'challengerName', 'points', 'level', 'snapshotB64', 'createdAt'])
+        && data.keys().size() == 6
+        && data.challengerId is string
+        && data.challengerId == request.auth.uid
+        && data.challengerName is string
+        && data.challengerName.size() <= 128
+        && data.points is int
+        && data.level is string
+        && data.level.size() <= 32
+        && data.snapshotB64 is string
+        && data.createdAt == request.time;
+    }
+
+    // Rules for students collection
+    match /students/{studentId} {
+      allow read: if isSignedIn();
+      allow write: if isOwner(studentId) || (isSignedIn() && request.auth.token.email == "stitchlab2027@gmail.com" && request.auth.token.email_verified == true);
+    }
+
+    // Rules for sync_codes collection (temporary 6-digit backup codes)
+    match /sync_codes/{code} {
+      allow read, write: if true;
+    }
+
+    // Rules for challenges collection (join challenges)
+    match /challenges/{challengeId} {
+      allow read, get, list: if true;
+      allow create: if isSignedIn() && isValidId(challengeId) && isValidChallenge(incoming());
+      allow update, delete: if isSignedIn() && resource.data.challengerId == request.auth.uid;
+    }
+
+    // Rules for StitchLab Academy classrooms
+    match /classrooms/{inviterId} {
+      allow read, write: if isSignedIn();
+      match /members/{classmateId} {
+        allow read, write: if isSignedIn();
+      }
+    }
+
+    // Allow read-only access for connection-verification tests
+    match /test/connection {
+      allow read: if true;
+    }
+  }
+}

@@ -1,0 +1,702 @@
+[
+  {
+    "id": "ssg-0-o5z6bmhu7",
+    "semester": "الترم الأول",
+    "word": "I",
+    "meaning": "أنا",
+    "ipa": "",
+    "imageUrl": "https://raw.githubusercontent.com/stitchLab1/stitchLab2027/main/1000000067.jpg",
+    "group": "ضمائر الفاعل والملكية",
+    "level": 1
+  },
+  {
+    "id": "ssg-1-s0sd71sjl",
+    "semester": "الترم الأول",
+    "word": "you",
+    "meaning": "في اللغة العربية تعبر عن ضمير المخاطب(أنتَ،أنتِ،أنتما،أنتم،أنتن)",
+    "ipa": "",
+    "imageUrl": "https://raw.githubusercontent.com/stitchLab1/stitchLab2027/main/1000000085%20(1).jpg",
+    "group": "ضمائر الفاعل والملكية",
+    "level": 1
+  },
+  {
+    "id": "ssg-2-zlt6tp4w",
+    "semester": "الترم الأول",
+    "word": "He",
+    "meaning": "",
+    "ipa": "",
+    "imageUrl": "https://raw.githubusercontent.com/stitchLab1/stitchLab2027/main/1000000091%20(1).jpg",
+    "group": "ضمائر الفاعل والملكية",
+    "level": 1
+  },
+  {
+    "id": "ssg-3-falkwkz67",
+    "semester": "الترم الأول",
+    "word": "She",
+    "meaning": "هي",
+    "ipa": "",
+    "imageUrl": "https://raw.githubusercontent.com/stitchLab1/stitchLab2027/main/1000000094.jpg",
+    "group": "ضمائر الفاعل والملكية",
+    "level": 1
+  },
+  {
+    "id": "ssg-4-qturjcyx8",
+    "semester": "الترم الأول",
+    "word": "it",
+    "meaning": "تُستخدم للمذكر والمؤنث دون تميز.ولايوجد لها ضمير مماثل تماما في اللغة العربية كما تُستعمل غالبا للإشارة إلى الجمادات أو الأشياء غير العاقلة.",
+    "ipa": "",
+    "imageUrl": "https://raw.githubusercontent.com/stitchLab1/stitchLab2027/main/1000365078_112922.png",
+    "group": "ضمائر الفاعل والملكية",
+    "level": 1
+  },
+  {
+    "id": "ssg-5-t07hzsejh",
+    "semester": "الترم الأول",
+    "word": "We",
+    "meaning": "نحن",
+    "ipa": "",
+    "imageUrl": "https://raw.githubusercontent.com/stitchLab1/stitchLab2027/main/1000000097.jpg",
+    "group": "ضمائر الفاعل والملكية",
+    "level": 1
+  },
+  {
+    "id": "ssg-6-6jqvb2swh",
+    "semester": "الترم الأول",
+    "word": "They",
+    "meaning": "تُستخدم للجمع للمذكر والمؤنث،وقد تُستخدم أحيانا للمثنى في بعض الأساليب غير الرسمية،لذلك يمكن أن تدل على:هم،هن،وأحيانًا هما.",
+    "ipa": "",
+    "imageUrl": "https://raw.githubusercontent.com/stitchLab1/stitchLab2027/main/file_000000007e6c71f4868ae4f798c2c5cc_112808.png",
+    "group": "ضمائر الفاعل والملكية",
+    "level": 1
+  },
+  {
+    "id": "ssg-7-kab9gcm4f",
+    "semester": "الترم الأول",
+    "word": "my",
+    "meaning": "(ي)في آخر الاسم تأتي بمعنى My في اللغة الإنجليزية ،وتسمى ياء الملكية .وهي تدل على أن الشيء يخص المتكلم.كتاب(ي) =My) book)",
+    "ipa": "",
+    "imageUrl": "https://raw.githubusercontent.com/stitchLab1/stitchLab2027/main/1000000108.jpg",
+    "group": "ضمائر الفاعل والملكية",
+    "level": 1
+  },
+  {
+    "id": "ssg-8-lziu9rbif",
+    "semester": "الترم الأول",
+    "word": "your",
+    "meaning": "تأتي بمعنى:كتاب(كَ)،كتاب(كِ).كتاب(كما)،كتاب(كم)،كتاب(كن)في الإنجليزية تستخدم لها استخدامان: إذا جاءت في آخر الجملة بدون اسم بعدها فتكون بمعنى: ل(ه) مثال: This book is his هذا الكتاب له وإذا جاءت قبل الاسم فتكون بمعنى: الاسم + ه مثال: His book كتابُ(هُ) .",
+    "ipa": "",
+    "imageUrl": "https://raw.githubusercontent.com/stitchLab1/stitchLab2027/main/1000000112%20(1).jpeg",
+    "group": "ضمائر الفاعل والملكية",
+    "level": 1
+  },
+  {
+    "id": "ssg-9-9pdejqhsk",
+    "semester": "الترم الأول",
+    "word": "his",
+    "meaning": "لها استخدامان: إذا جاءت في آخر الجملة بدون اسم بعدها فتكون بمعنى: ل(ه) مثال: This book is his هذا الكتاب له وإذا جاءت قبل الاسم فتكون بمعنى: الاسم + ه مثال: His book كتابُ(هُ) .وهي الضمير الوحيد الذي يبقى شكله نفسه مع الاسم:his وبدون الاسم:his",
+    "ipa": "",
+    "imageUrl": "https://raw.githubusercontent.com/stitchLab1/stitchLab2027/main/1000000122.jpg",
+    "group": "ضمائر الفاعل والملكية",
+    "level": 1
+  },
+  {
+    "id": "ssg-10-lfbzgm5is",
+    "semester": "الترم الأول",
+    "word": "her",
+    "meaning": "تُستخدم إذا جاءت قبل الإسم فتكون بمعنى: الإسم +(ها) مثال her book كتاب(ها)",
+    "ipa": "",
+    "imageUrl": "https://raw.githubusercontent.com/stitchLab1/stitchLab2027/main/1000000120.jpg",
+    "group": "ضمائر الفاعل والملكية",
+    "level": 1
+  },
+  {
+    "id": "ssg-11-9iz45ryw",
+    "semester": "الترم الأول",
+    "word": "its",
+    "meaning": "تُستخدم مع غير العاقلة وتأتي قبل الإسم فقط وتعني الإسم +(ه)/(ها).its) food)طعام(ها)",
+    "ipa": "",
+    "imageUrl": "https://raw.githubusercontent.com/stitchLab1/stitchLab2027/main/1000000123.jpg",
+    "group": "ضمائر الفاعل والملكية",
+    "level": 1
+  },
+  {
+    "id": "ssg-12-hrqdlfykc",
+    "semester": "الترم الأول",
+    "word": "our",
+    "meaning": "تأتي قبل الإسم وتعني:الإسم +(نا) وتُستخدم عندما يكون المتكلم أكثر من شخص.أقلام(نا) our) pens)",
+    "ipa": "",
+    "imageUrl": "https://raw.githubusercontent.com/stitchLab1/stitchLab2027/main/1000000126.jpg",
+    "group": "ضمائر الفاعل والملكية",
+    "level": 1
+  },
+  {
+    "id": "ssg-13-cjhj3upjo",
+    "semester": "الترم الأول",
+    "word": "their",
+    "meaning": "تدل على الملكية للجمع سواء مؤنث أو مذكر أقلام(هم)/أقلام(هن)their) pens)",
+    "ipa": "",
+    "imageUrl": "https://raw.githubusercontent.com/stitchLab1/stitchLab2027/main/1000000142.jpg",
+    "group": "ضمائر الفاعل والملكية",
+    "level": 1
+  },
+  {
+    "id": "ssg-14-lzdnqul3",
+    "semester": "الترم الأول",
+    "word": "mine",
+    "meaning": "تأتي بدون اسم بعدها وتعني ل(ي).وغالبا تأتي في نهاية الجملة .مثال هذا الكتاب لي.This book is mine",
+    "ipa": "",
+    "imageUrl": "https://raw.githubusercontent.com/stitchLab1/stitchLab2027/main/1000000135.jpg",
+    "group": "ضمائر الفاعل والملكية",
+    "level": 1
+  },
+  {
+    "id": "ssg-15-g0j3vxfz",
+    "semester": "الترم الأول",
+    "word": "yours",
+    "meaning": "تعني ل(كَ)،ل(كِ)،ل(كما)،ل(كم)،ل(كنّ) .وتأتي بدون اسم بعدها ،وغالبا في نهاية الجملة.هذا الكتاب لكَ،لكِ.لكما،لكم،لكن،This book is yours",
+    "ipa": "",
+    "imageUrl": "https://raw.githubusercontent.com/stitchLab1/stitchLab2027/main/1000000140%20(1).webp",
+    "group": "ضمائر الفاعل والملكية",
+    "level": 1
+  },
+  {
+    "id": "ssg-16-9w2mg7m6",
+    "semester": "الترم الأول",
+    "word": "hers",
+    "meaning": "تأتي بدون اسم بعدها،وغالبا في نهاية الجملة وتعني ل(ها) .هذا الكتاب لها،This book is hers",
+    "ipa": "",
+    "imageUrl": "https://raw.githubusercontent.com/stitchLab1/stitchLab2027/main/1000000146.jpg",
+    "group": "ضمائر الفاعل والملكية",
+    "level": 1
+  },
+  {
+    "id": "ssg-17-3wncb0az",
+    "semester": "الترم الأول",
+    "word": "ours",
+    "meaning": "تأتي بدون اسم بعدها،وغالبا في نهاية الجملة بمعنى ل(نا).مثال هذا الكتاب لنا، This book is ours",
+    "ipa": "",
+    "imageUrl": "https://raw.githubusercontent.com/stitchLab1/stitchLab2027/main/1000000148.jpg",
+    "group": "ضمائر الفاعل والملكية",
+    "level": 1
+  },
+  {
+    "id": "ssg-18-ibul99hc",
+    "semester": "الترم الأول",
+    "word": "theirs",
+    "meaning": "تأتي بدون اسم بعدها ،وغالبا في نهاية الجملة،وتعني:ل(هن)/ل(هم).مثال :الأقلام لهم،The pens are theirs",
+    "ipa": "",
+    "imageUrl": "https://raw.githubusercontent.com/stitchLab1/stitchLab2027/main/1000000150.jpg",
+    "group": "ضمائر الفاعل والملكية",
+    "level": 1
+  },
+  {
+    "id": "ssg-19-s06l2nfsq",
+    "semester": "الترم الأول",
+    "word": "Name",
+    "meaning": "اسم",
+    "ipa": "",
+    "imageUrl": "https://raw.githubusercontent.com/stitchLab1/stitchLab2027/main/1000000153.jpg",
+    "group": "كلمات عن النفس",
+    "level": 1
+  },
+  {
+    "id": "ssg-20-968u7zn3y",
+    "semester": "الترم الأول",
+    "word": "Age",
+    "meaning": "العُمُر",
+    "ipa": "",
+    "imageUrl": "https://raw.githubusercontent.com/stitchLab1/stitchLab2027/main/1000000158.jpg",
+    "group": "كلمات عن النفس",
+    "level": 1
+  },
+  {
+    "id": "ssg-21-w4ufl92g6",
+    "semester": "الترم الأول",
+    "word": "Job",
+    "meaning": "وظيفة",
+    "ipa": "",
+    "imageUrl": "https://raw.githubusercontent.com/stitchLab1/stitchLab2027/main/1000000160.jpg",
+    "group": "كلمات عن النفس",
+    "level": 1
+  },
+  {
+    "id": "ssg-22-9f8ve9c6",
+    "semester": "الترم الأول",
+    "word": "Hobby",
+    "meaning": "هواية",
+    "ipa": "",
+    "imageUrl": "https://raw.githubusercontent.com/stitchLab1/stitchLab2027/main/1000000163%20(1).webp",
+    "group": "كلمات عن النفس",
+    "level": 1
+  },
+  {
+    "id": "ssg-23-28rf3nx0fj",
+    "semester": "الترم الأول",
+    "word": "Creator",
+    "meaning": "صانع/مُبدع/منشئ",
+    "ipa": "",
+    "imageUrl": "https://raw.githubusercontent.com/stitchLab1/stitchLab2027/main/1000000166.webp",
+    "group": "كلمات عن النفس",
+    "level": 1
+  },
+  {
+    "id": "ssg-24-4bbza814",
+    "semester": "الترم الأول",
+    "word": "Proud",
+    "meaning": "فخور",
+    "ipa": "",
+    "imageUrl": "https://raw.githubusercontent.com/stitchLab1/stitchLab2027/main/1000000171.webp",
+    "group": "كلمات عن النفس",
+    "level": 1
+  },
+  {
+    "id": "ssg-25-rbt1fxec3",
+    "semester": "الترم الأول",
+    "word": "Unique",
+    "meaning": "فريد من نوعه",
+    "ipa": "",
+    "imageUrl": "https://raw.githubusercontent.com/stitchLab1/stitchLab2027/main/1000000177.webp",
+    "group": "كلمات عن النفس",
+    "level": 1
+  },
+  {
+    "id": "ssg-26-6hce8vhm",
+    "semester": "الترم الأول",
+    "word": "Family",
+    "meaning": "عائلة",
+    "ipa": "",
+    "imageUrl": "https://raw.githubusercontent.com/stitchLab1/stitchLab2027/main/1000000179.webp",
+    "group": "أفراد العائلة",
+    "level": 1
+  },
+  {
+    "id": "ssg-27-j1u0eqyqw",
+    "semester": "الترم الأول",
+    "word": "Mother",
+    "meaning": "أم",
+    "ipa": "",
+    "imageUrl": "https://raw.githubusercontent.com/stitchLab1/stitchLab2027/main/1000000182.webp",
+    "group": "أفراد العائلة",
+    "level": 1
+  },
+  {
+    "id": "ssg-28-s8697xaf",
+    "semester": "الترم الأول",
+    "word": "Father",
+    "meaning": "أب",
+    "ipa": "",
+    "imageUrl": "https://raw.githubusercontent.com/stitchLab1/stitchLab2027/main/1000000185.webp",
+    "group": "أفراد العائلة",
+    "level": 1
+  },
+  {
+    "id": "ssg-29-dcgmrjo84d",
+    "semester": "الترم الأول",
+    "word": "Sister",
+    "meaning": "أخت",
+    "ipa": "",
+    "imageUrl": "https://raw.githubusercontent.com/stitchLab1/stitchLab2027/main/1000000194.webp",
+    "group": "أفراد العائلة",
+    "level": 1
+  },
+  {
+    "id": "ssg-30-zg2d8b7ku",
+    "semester": "الترم الأول",
+    "word": "Brother",
+    "meaning": "أخ",
+    "ipa": "",
+    "imageUrl": "https://raw.githubusercontent.com/stitchLab1/stitchLab2027/main/1000000192.webp",
+    "group": "أفراد العائلة",
+    "level": 1
+  },
+  {
+    "id": "ssg-31-1p91916gp",
+    "semester": "الترم الأول",
+    "word": "Grandmother",
+    "meaning": "الجدة",
+    "ipa": "",
+    "imageUrl": "https://raw.githubusercontent.com/stitchLab1/stitchLab2027/main/1000000198.webp",
+    "group": "أفراد العائلة",
+    "level": 1
+  },
+  {
+    "id": "ssg-32-0x0bnpowg",
+    "semester": "الترم الأول",
+    "word": "Grandfather",
+    "meaning": "الجد",
+    "ipa": "",
+    "imageUrl": "https://raw.githubusercontent.com/stitchLab1/stitchLab2027/main/1000000206.webp",
+    "group": "أفراد العائلة",
+    "level": 1
+  },
+  {
+    "id": "ssg-33-myla5f3pm",
+    "semester": "الترم الأول",
+    "word": "Relative",
+    "meaning": "أحد الأقارب",
+    "ipa": "",
+    "imageUrl": "https://raw.githubusercontent.com/stitchLab1/stitchLab2027/main/1000000202.webp",
+    "group": "أفراد العائلة",
+    "level": 1
+  },
+  {
+    "id": "ssg-34-87j1ldrb",
+    "semester": "الترم الأول",
+    "word": "Baby",
+    "meaning": "طفل رضيع",
+    "ipa": "",
+    "imageUrl": "https://raw.githubusercontent.com/stitchLab1/stitchLab2027/main/1000000207.webp",
+    "group": "أفراد العائلة",
+    "level": 1
+  },
+  {
+    "id": "ssg-35-p5mterpe5",
+    "semester": "الترم الأول",
+    "word": "Couple",
+    "meaning": "زوجان",
+    "ipa": "",
+    "imageUrl": "https://raw.githubusercontent.com/stitchLab1/stitchLab2027/main/1000000215.webp",
+    "group": "أفراد العائلة",
+    "level": 1
+  },
+  {
+    "id": "ssg-36-986rdl8xg",
+    "semester": "الترم الأول",
+    "word": "Hi",
+    "meaning": "تُستخدم بشكل خفيف وعفوي أكثر، غالبًا مع الأصدقاء أو ببداية الكلام اليومية.",
+    "ipa": "",
+    "imageUrl": "https://raw.githubusercontent.com/stitchLab1/stitchLab2027/main/1000000216.webp",
+    "group": "التحية والتواصل",
+    "level": 1
+  },
+  {
+    "id": "ssg-37-akdff5cor",
+    "semester": "الترم الأول",
+    "word": "Hello",
+    "meaning": "تحية عامة، وتصلح رسمي أو غير رسمي",
+    "ipa": "",
+    "imageUrl": "https://raw.githubusercontent.com/stitchLab1/stitchLab2027/main/1000000219.webp",
+    "group": "التحية والتواصل",
+    "level": 1
+  },
+  {
+    "id": "ssg-38-rq1up4sle",
+    "semester": "الترم الأول",
+    "word": "Welcome",
+    "meaning": "تُقال للاستقبال أو لما ترحّب بشخص دخل مكان أو انضم لشيء",
+    "ipa": "",
+    "imageUrl": "https://raw.githubusercontent.com/stitchLab1/stitchLab2027/main/1000000221.webp",
+    "group": "التحية والتواصل",
+    "level": 1
+  },
+  {
+    "id": "ssg-39-aax1eybdo",
+    "semester": "الترم الأول",
+    "word": "Morning",
+    "meaning": "الصباح",
+    "ipa": "",
+    "imageUrl": "https://raw.githubusercontent.com/stitchLab1/stitchLab2027/main/1000000225.webp",
+    "group": "التحية والتواصل",
+    "level": 1
+  },
+  {
+    "id": "ssg-40-1wfn4dl8p",
+    "semester": "الترم الأول",
+    "word": "Afternoon",
+    "meaning": "فترة ما بعد الظهر",
+    "ipa": "",
+    "imageUrl": "https://raw.githubusercontent.com/stitchLab1/stitchLab2027/main/1000000250.webp",
+    "group": "التحية والتواصل",
+    "level": 1
+  },
+  {
+    "id": "ssg-41-njmec1vd4",
+    "semester": "الترم الأول",
+    "word": "Evening",
+    "meaning": "المساء",
+    "ipa": "",
+    "imageUrl": "https://raw.githubusercontent.com/stitchLab1/stitchLab2027/main/1000000246.webp",
+    "group": "التحية والتواصل",
+    "level": 1
+  },
+  {
+    "id": "ssg-42-eybk933e",
+    "semester": "الترم الأول",
+    "word": "Goodbye",
+    "meaning": "وداعًا",
+    "ipa": "",
+    "imageUrl": "https://raw.githubusercontent.com/stitchLab1/stitchLab2027/main/1000000254.webp",
+    "group": "التحية والتواصل",
+    "level": 1
+  },
+  {
+    "id": "ssg-43-3r0p4xtxg",
+    "semester": "الترم الأول",
+    "word": "Thanks",
+    "meaning": "شكرًا",
+    "ipa": "",
+    "imageUrl": "https://raw.githubusercontent.com/stitchLab1/stitchLab2027/main/1000000256.webp",
+    "group": "التحية والتواصل",
+    "level": 1
+  },
+  {
+    "id": "ssg-44-es2ohqcp8",
+    "semester": "الترم الأول",
+    "word": "Please",
+    "meaning": "من فضلك أو رجاءً",
+    "ipa": "",
+    "imageUrl": "https://raw.githubusercontent.com/stitchLab1/stitchLab2027/main/1000000258.webp",
+    "group": "التحية والتواصل",
+    "level": 1
+  },
+  {
+    "id": "ssg-45-x0scd5wdb",
+    "semester": "الترم الأول",
+    "word": "Sorry",
+    "meaning": "آسف أو أعتذر",
+    "ipa": "",
+    "imageUrl": "https://raw.githubusercontent.com/stitchLab1/stitchLab2027/main/1000000260.webp",
+    "group": "التحية والتواصل",
+    "level": 1
+  },
+  {
+    "id": "ssg-46-jsf1uc5q",
+    "semester": "الترم الأول",
+    "word": "Kind",
+    "meaning": "طيب أو لطيف أو عطوف",
+    "ipa": "",
+    "imageUrl": "https://raw.githubusercontent.com/stitchLab1/stitchLab2027/main/1000000264.webp",
+    "group": "صفات الشخصية",
+    "level": 1
+  },
+  {
+    "id": "ssg-47-1bhdacv9r",
+    "semester": "الترم الأول",
+    "word": "Smart",
+    "meaning": "ذكي",
+    "ipa": "",
+    "imageUrl": "https://raw.githubusercontent.com/stitchLab1/stitchLab2027/main/1000000267.webp",
+    "group": "صفات الشخصية",
+    "level": 1
+  },
+  {
+    "id": "ssg-48-k978wl0x",
+    "semester": "الترم الأول",
+    "word": "Creative",
+    "meaning": "تعني مبدع أو مبتكر أو ذو خيال واسع",
+    "ipa": "",
+    "imageUrl": "https://raw.githubusercontent.com/stitchLab1/stitchLab2027/main/1000000274.webp",
+    "group": "صفات الشخصية",
+    "level": 1
+  },
+  {
+    "id": "ssg-49-y35e3mw4e",
+    "semester": "الترم الأول",
+    "word": "Hardworking",
+    "meaning": "مجتهد أو كثير العمل أو يعمل بجد",
+    "ipa": "",
+    "imageUrl": "https://raw.githubusercontent.com/stitchLab1/stitchLab2027/main/1000000278.webp",
+    "group": "صفات الشخصية",
+    "level": 1
+  },
+  {
+    "id": "ssg-50-hsj2rmjx4",
+    "semester": "الترم الأول",
+    "word": "Patient",
+    "meaning": "صبور",
+    "ipa": "",
+    "imageUrl": "https://raw.githubusercontent.com/stitchLab1/stitchLab2027/main/1000000280.webp",
+    "group": "صفات الشخصية",
+    "level": 1
+  },
+  {
+    "id": "ssg-51-3bht6qhr",
+    "semester": "الترم الأول",
+    "word": "Friendly",
+    "meaning": "لطيف في التعامل",
+    "ipa": "",
+    "imageUrl": "https://raw.githubusercontent.com/stitchLab1/stitchLab2027/main/1000000283.webp",
+    "group": "صفات الشخصية",
+    "level": 1
+  },
+  {
+    "id": "ssg-52-vz5m8bczj",
+    "semester": "الترم الأول",
+    "word": "Happy",
+    "meaning": "سعيد",
+    "ipa": "",
+    "imageUrl": "https://raw.githubusercontent.com/stitchLab1/stitchLab2027/main/1000000284.webp",
+    "group": "صفات الشخصية",
+    "level": 1
+  },
+  {
+    "id": "ssg-53-ftmx3vsve",
+    "semester": "الترم الأول",
+    "word": "Calm",
+    "meaning": "هادئ الأعصاب",
+    "ipa": "",
+    "imageUrl": "https://raw.githubusercontent.com/stitchLab1/stitchLab2027/main/1000000286.webp",
+    "group": "صفات الشخصية",
+    "level": 1
+  },
+  {
+    "id": "ssg-54-rcgqsonl",
+    "semester": "الترم الأول",
+    "word": "Bold",
+    "meaning": "جريء أو شجاع",
+    "ipa": "",
+    "imageUrl": "https://raw.githubusercontent.com/stitchLab1/stitchLab2027/main/1000000292.webp",
+    "group": "صفات الشخصية",
+    "level": 1
+  },
+  {
+    "id": "ssg-55-7yqa4cvcp",
+    "semester": "الترم الأول",
+    "word": "Skillful",
+    "meaning": "ماهر أو بارع",
+    "ipa": "",
+    "imageUrl": "https://raw.githubusercontent.com/stitchLab1/stitchLab2027/main/1000000294.webp",
+    "group": "صفات الشخصية",
+    "level": 1
+  },
+  {
+    "id": "ssg-56-29mg036h",
+    "semester": "الترم الأول",
+    "word": "am",
+    "meaning": "am: تُستخدم مع I لربط المبتدأ بالخبر في الجملة الاسمية، ولا يوجد لها مقابل مباشر في اللغة العربية.",
+    "ipa": "",
+    "imageUrl": "https://raw.githubusercontent.com/stitchLab1/stitchLab2027/main/1000000296.webp",
+    "group": "أفعال الحالة والوجود",
+    "level": 1
+  },
+  {
+    "id": "ssg-57-adsk195z0j",
+    "semester": "الترم الأول",
+    "word": "is",
+    "meaning": "is: تُستخدم مع he / she / it لربط المبتدأ بالخبر في الجملة الاسمية ، ولا يوجد لها مقابل مباشر في اللغة العربية",
+    "ipa": "",
+    "imageUrl": "https://raw.githubusercontent.com/stitchLab1/stitchLab2027/main/1000000298.webp",
+    "group": "أفعال الحالة والوجود",
+    "level": 1
+  },
+  {
+    "id": "ssg-58-q8foej1bd",
+    "semester": "الترم الأول",
+    "word": "are",
+    "meaning": "are: تُستخدم مع you / we / they لربط المبتدأ بالخبر في الجملة الاسمية ، ولا يوجد لها مقابل مباشر في العربية",
+    "ipa": "",
+    "imageUrl": "https://raw.githubusercontent.com/stitchLab1/stitchLab2027/main/1000000303.webp",
+    "group": "أفعال الحالة والوجود",
+    "level": 1
+  },
+  {
+    "id": "ssg-59-8zujbctwj",
+    "semester": "الترم الأول",
+    "word": "was",
+    "meaning": "was: تُستخدم في الماضي مع المفرد (I / he / she / it) ويقابلها غالبًا كنت / كان / كانت",
+    "ipa": "",
+    "imageUrl": "https://raw.githubusercontent.com/stitchLab1/stitchLab2027/main/1000000326.webp",
+    "group": "أفعال الحالة والوجود",
+    "level": 1
+  },
+  {
+    "id": "ssg-60-7hw8uzeeb",
+    "semester": "الترم الأول",
+    "word": "were",
+    "meaning": "were تُستخدم مع: I / You / We / They\nبمعنىwere = كان",
+    "ipa": "",
+    "imageUrl": "https://raw.githubusercontent.com/stitchLab1/stitchLab2027/main/1000000324.webp",
+    "group": "أفعال الحالة والوجود",
+    "level": 1
+  },
+  {
+    "id": "ssg-61-k2496z4co",
+    "semester": "الترم الأول",
+    "word": "Have",
+    "meaning": "Have تُستخدم مع: I / You / We / They\nبمعنىHave = يملك / لديه",
+    "ipa": "",
+    "imageUrl": "https://raw.githubusercontent.com/stitchLab1/stitchLab2027/main/1000000311.webp",
+    "group": "أفعال الحالة والوجود",
+    "level": 1
+  },
+  {
+    "id": "ssg-62-26mxfhlp",
+    "semester": "الترم الأول",
+    "word": "Has",
+    "meaning": "Has تأتي مع He, She, It\nHas = يملك / لديه",
+    "ipa": "",
+    "imageUrl": "https://raw.githubusercontent.com/stitchLab1/stitchLab2027/main/1000000313.webp",
+    "group": "أفعال الحالة والوجود",
+    "level": 1
+  },
+  {
+    "id": "ssg-63-5z6bp44c",
+    "semester": "الترم الأول",
+    "word": "Be",
+    "meaning": "Be = يكون / أن يكون، وهو المقابل العربي للمصدر الإنجليزي to be، \nوهو الأصل الذي تخرج منه الأشكال: am, is, are, was, were.",
+    "ipa": "",
+    "imageUrl": "https://raw.githubusercontent.com/stitchLab1/stitchLab2027/main/1000000316.webp",
+    "group": "أفعال الحالة والوجود",
+    "level": 1
+  },
+  {
+    "id": "ssg-64-jea50n8fc",
+    "semester": "الترم الأول",
+    "word": "Become",
+    "meaning": "يصبح / يصير",
+    "ipa": "",
+    "imageUrl": "https://raw.githubusercontent.com/stitchLab1/stitchLab2027/main/compressed_image-1.jpg",
+    "group": "أفعال الحالة والوجود",
+    "level": 1
+  },
+  {
+    "id": "ssg-65-zl5z192up",
+    "semester": "الترم الأول",
+    "word": "Seems",
+    "meaning": "يبدو",
+    "ipa": "",
+    "imageUrl": "https://raw.githubusercontent.com/stitchLab1/stitchLab2027/main/1000000330.webp",
+    "group": "أفعال الحالة والوجود",
+    "level": 1
+  },
+  {
+    "id": "ssg-66-3j7phkfy",
+    "semester": "الترم الأول",
+    "word": "Home",
+    "meaning": "بيتي / منزلي . المكان الذي أعيش فيه أو أنتمي إليه، فالتركيز على السكن والشعور بالانتماء",
+    "ipa": "",
+    "imageUrl": "https://raw.githubusercontent.com/stitchLab1/stitchLab2027/main/1000000332.webp",
+    "group": "كلمات تعريفية بالمكان والعمل",
+    "level": 1
+  },
+  {
+    "id": "ssg-67-41meuipu",
+    "semester": "الترم الأول",
+    "word": "House",
+    "meaning": "لا يهم إن كنت تعيش فيه أم لا\nالتركيز على البناء نفسه",
+    "ipa": "",
+    "imageUrl": "https://raw.githubusercontent.com/stitchLab1/stitchLab2027/main/1000000344.webp",
+    "group": "كلمات تعريفية بالمكان والعمل",
+    "level": 1
+  },
+  {
+    "id": "ssg-68-6uuyo5d5h",
+    "semester": "الترم الأول",
+    "word": "School",
+    "meaning": "مدرسة",
+    "ipa": "",
+    "imageUrl": "https://raw.githubusercontent.com/stitchLab1/stitchLab2027/main/1000000340.webp",
+    "group": "كلمات تعريفية بالمكان والعمل",
+    "level": 1
+  },
+  {
+    "id": "ssg-69-cufca03q",
+    "semester": "الترم الأول",
+    "word": "Office",
+    "meaning": "مكتب",
+    "ipa": "",
+    "imageUrl": "https://raw.githubusercontent.com/stitchLab1/stitchLab2027/main/1000000342.webp",
+    "group": "كلمات تعريفية بالمكان والعمل",
+    "level": 1
+  }
+]

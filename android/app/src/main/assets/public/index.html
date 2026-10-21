@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+    <link rel="manifest" href="./manifest.json" />
+    <link rel="icon" href="https://raw.githubusercontent.com/stitchlab1/stitchlab2/0ceec11a5ca77c5d4607a90cab424bc9ec880155/stitchlab_icon_hd.png" />
+    <meta name="theme-color" content="#CDFF00" />
+    <link rel="apple-touch-icon" href="https://raw.githubusercontent.com/stitchlab1/stitchlab2/0ceec11a5ca77c5d4607a90cab424bc9ec880155/stitchlab_icon_hd.png" />
+    <meta name="google-site-verification" content="pO_oJDCS9_XZ53KYkfu3MTUEyfw4_OHd-AckzooZoBI" />
+    <title>StitchLab • تفاعلية تعلم الإنجليزية الذكية</title>
+    <!-- Adsterra Social Bar Integration -->
+    <script src="https://pl29694839.effectivecpmnetwork.com/e1/9d/d7/e19dd79cfea257668bce6532879dbbd0.js"></script>
+    <script type="module" crossorigin src="./assets/index-DhNDJKdg.js"></script>
+    <link rel="stylesheet" crossorigin href="./assets/index-CeZUhDRm.css">
+  </head>
+  <body class="bg-[#fafdf5] text-slate-900 overflow-x-hidden select-none">
+    <div id="root"></div>
+
+    <script>
+      // Service Worker registration with smart background updates
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('/service-worker.js')
+            .then(reg => {
+              console.log('StitchLab PWA Service Worker Registered!', reg.scope);
+              
+              // Smart background check for service worker updates every 5 minutes silently
+              setInterval(() => {
+                reg.update().catch(err => console.log('Silent update check skipped:', err));
+              }, 300000);
+            })
+            .catch(err => console.error('Service Worker Registry Failed:', err));
+        });
+      }
+
+      // Defer installation prompt
+      window.deferredInstallPrompt = null;
+      window.addEventListener('beforeinstallprompt', (e) => {
+        // Prevent Chrome 67 and earlier from automatically showing the prompt
+        e.preventDefault();
+        // Stash the event so it can be triggered later.
+        window.deferredInstallPrompt = e;
+        
+        // Dispatch a custom event to notify our React app that PWA installation is ready!
+        const event = new CustomEvent('pwa-installable', { detail: e });
+        window.dispatchEvent(event);
+      });
+    </script>
+    <!-- Adsterra Social Bar Integration -->
+    <script src="https://pl29694839.effectivecpmnetwork.com/e1/9d/d7/e19dd79cfea257668bce6532879dbbd0.js"></script>
+  </body>
+</html>
+

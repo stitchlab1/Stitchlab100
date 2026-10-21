@@ -1,0 +1,9 @@
+{
+  "appId": "com.stitchlab.app",
+  "appName": "StitchLab",
+  "webDir": "dist",
+  "bundledWebRuntime": false,
+  "android": {
+    "allowMixedContent": true
+  }
+}

@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">StitchLab</string>
+    <string name="title_activity_main">StitchLab</string>
+    <string name="package_name">com.stitchlab.app</string>
+    <string name="custom_url_scheme">com.stitchlab.app</string>
+</resources>

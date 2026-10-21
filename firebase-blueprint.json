@@ -1,0 +1,69 @@
+{
+  "entities": {
+    "student": {
+      "title": "Student Progress",
+      "description": "Represents a student's learning progress, levels, points, custom cards, vocabulary, quiz attempts, and statistics.",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string", "description": "Firebase user ID" },
+        "email": { "type": "string", "description": "Student email address" },
+        "name": { "type": "string", "description": "Student display name" },
+        "level": { "type": "string", "enum": ["Beginner", "Intermediate", "Advanced"], "description": "Selected English learning level" },
+        "points": { "type": "integer", "description": "Learning points score accumulated" },
+        "unlockedLevel": { "type": "integer", "description": "Unlocks level number (1 to 9)" },
+        "completedLevels": { "type": "array", "description": "List of completed level numbers" },
+        "completedGroups": { "type": "array", "description": "List of completed vocabulary card group keys" },
+        "customFlashcards": { "type": "array", "description": "List of custom flashcards created by the student" },
+        "conversationsHad": { "type": "integer", "description": "Count of AI persona conversations" },
+        "quizScore": { "type": "integer", "description": "Best score in quiz" },
+        "quizAttempts": { "type": "integer", "description": "Count of quiz attempts" },
+        "analyzedCount": { "type": "integer", "description": "Sentence analyses count" },
+        "visitDates": { "type": "array", "description": "Dates the student logged in for streak calculation" },
+        "unlockedAdvertiserGroups": { "type": "array", "description": "Ad gate unlocked publisher keys" },
+        "dailySecondsLeft": { "type": "integer", "description": "Timer seconds remaining in session" },
+        "extraAdClaimsCount": { "type": "integer", "description": "Count of ad claims done today" },
+        "updatedAt": { "type": "string", "format": "date-time", "description": "Timestamp of last modification" }
+      },
+      "required": ["uid", "email", "name", "level", "points"]
+    },
+    "sync_code": {
+      "title": "Sync Code",
+      "description": "Represents a temporary 6-digit sync code mapping to a student's progress payload.",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string", "description": "The unique ID of the student who generated the code" },
+        "payload": { "type": "object", "description": "The student progress payload object" },
+        "createdAt": { "type": "string", "format": "date-time", "description": "Timestamp of code creation" }
+      },
+      "required": ["userId", "payload"]
+    },
+    "challenge": {
+      "title": "Student Challenge",
+      "description": "Represents a student join invite challenge with a snapshot image dynamic card.",
+      "type": "object",
+      "properties": {
+        "challengerId": { "type": "string", "description": "Firebase UID of the challenger" },
+        "challengerName": { "type": "string", "description": "Student display name of the challenger" },
+        "points": { "type": "integer", "description": "Points value shown on the challenge card" },
+        "level": { "type": "string", "description": "English proficiency level of the challenger" },
+        "snapshotB64": { "type": "string", "description": "Base64 encoded snapshot screenshot of the student's workspace" },
+        "createdAt": { "type": "string", "format": "date-time", "description": "Timestamp of challenge creation" }
+      },
+      "required": ["challengerId", "challengerName", "points", "level", "snapshotB64"]
+    }
+  },
+  "firestore": {
+    "students/{studentId}": {
+      "schema": "student",
+      "description": "User student record by the student document ID (Firebase Auth UID)."
+    },
+    "sync_codes/{code}": {
+      "schema": "sync_code",
+      "description": "Collection of 6-digit temporary codes for transferring progress."
+    },
+    "challenges/{challengeId}": {
+      "schema": "challenge",
+      "description": "Challenge cards showing results and scores shared by students."
+    }
+  }
+}
