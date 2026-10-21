@@ -32,7 +32,7 @@ import {
   PRESET_FLASHCARDS,
   playAudioFeedback,
   playButtonClickSound
-} from "./components/types";
+} from components"./types.tsx";
 
 // Import Firebase architecture & systems
 import { 
